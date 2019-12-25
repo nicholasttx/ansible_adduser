@@ -1,0 +1,15 @@
+---
+- hosts: gateway
+  remote_user: ansible
+  become: true
+  become_method: sudo
+#  include_vars: accounts.yml
+  tasks:
+  - include_vars: accounts.yml
+  - name: Add user and set password
+    user:
+      name: "{{ item.name }}"
+      password: "{{ item.password | password_hash('md5') }}"
+      update_password: on_create
+      shell: /bin/bash 
+    with_items: "{{ users }}"

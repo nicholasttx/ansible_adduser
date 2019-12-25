@@ -1,0 +1,1 @@
+ansible-playbook -i myinventory.ini --vault-password-file .vaultpass adduser.yaml --check
